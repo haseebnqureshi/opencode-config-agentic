@@ -1,0 +1,86 @@
+{
+  "$schema": "https://opencode.ai/config.json",
+  "permission": {
+    "*": "allow",
+    "bash": {
+      "*": "allow",
+      "git push": "ask"
+    }
+  },
+  "agent": {
+    "build": {
+      "description": "Primary development agent with full tool access",
+      "prompt": "You have access to specialized subagents. Use them proactively:\n\n- @sprint-worker - Fast Haiku 4.5 agent for parallel subtask execution\n- @frontend-senior-dev - For frontend DRY code reviews (Vue/Nuxt/Tailwind)\n- @backend-senior-dev - For backend DRY code reviews (Express/TypeScript)\n- @repo-manager - For git commits (invoke after completing work)\n- @runtime-developer - For debugging runtime errors\n- @product-manager - For feature validation and user workflow testing\n\nUse /sprint to deploy parallel Haiku agents for fast feature building.\nUse /codereview to invoke both senior devs for a full code review.\nUse /commit to create clean git commits.\nUse /debug to fix runtime errors.\nUse /runtime to start/stop the dev server.\nUse /features to validate user workflows and feature completeness."
+    },
+    "plan": {
+      "description": "Planning and analysis agent (read-only except git)",
+      "prompt": "You are in planning mode. You can analyze code and suggest changes but cannot edit files directly.\n\nYou have access to:\n- @repo-manager - For git commits when planning is complete\n\nFor code reviews, suggest using /codereview in build mode.\nFor implementation, switch to build mode with Tab."
+    },
+    "repo-manager": {
+      "description": "Git operations handler",
+      "provider": {
+        "anthropic": {
+          "models": {
+            "claude-haiku-4-5": {
+              "options": {
+                "thinking": {
+                  "type": "disabled"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "provider": {
+    "lmstudio": {
+      "npm": "@ai-sdk/openai-compatible",
+      "options": {
+        "baseURL": "http://localhost:1234/v1"
+      },
+      "models": {
+        "qwen2.5-coder-7b-instruct-mlx": {
+          "tools": true,
+          "reasoning": false
+        }
+      }
+    },
+    "anthropic": {
+      "models": {
+        "claude-sonnet-4-5": {
+          "options": {
+            "thinking": {
+              "type": "enabled",
+              "budgetTokens": 16000
+            }
+          }
+        },
+        "claude-opus-4-5": {
+          "options": {
+            "thinking": {
+              "type": "enabled",
+              "budgetTokens": 16000
+            }
+          }
+        },
+        "claude-haiku-4-5": {
+          "options": {
+            "thinking": {
+              "type": "enabled",
+              "budgetTokens": 16000
+            }
+          }
+        },
+        "claude-sonnet-4-5-20250929": {
+          "options": {
+            "thinking": {
+              "type": "enabled",
+              "budgetTokens": 16000
+            }
+          }
+        }
+      }
+    }
+  }
+}
