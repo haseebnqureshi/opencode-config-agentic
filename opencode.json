@@ -34,28 +34,8 @@
     }
   },
   "provider": {
-    "lmstudio": {
-      "npm": "@ai-sdk/openai-compatible",
-      "options": {
-        "baseURL": "http://localhost:1234/v1"
-      },
-      "models": {
-        "qwen2.5-coder-7b-instruct-mlx": {
-          "tools": true,
-          "reasoning": false
-        }
-      }
-    },
     "anthropic": {
       "models": {
-        "claude-sonnet-4-5": {
-          "options": {
-            "thinking": {
-              "type": "enabled",
-              "budgetTokens": 16000
-            }
-          }
-        },
         "claude-opus-4-5": {
           "options": {
             "thinking": {
@@ -64,7 +44,7 @@
             }
           }
         },
-        "claude-haiku-4-5": {
+        "claude-sonnet-4-5": {
           "options": {
             "thinking": {
               "type": "enabled",
@@ -72,7 +52,7 @@
             }
           }
         },
-        "claude-sonnet-4-5-20250929": {
+        "claude-haiku-4-5": {
           "options": {
             "thinking": {
               "type": "enabled",
